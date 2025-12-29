@@ -44,7 +44,7 @@ export default{
                 return;
             }
             try{
-                const res = await fetch(`http://localhost:3000/productDetail/${id}?name=${name}`);
+                const res = await fetch(`https://vue-project-i8he.onrender.com/productDetail/${id}?name=${name}`);
                 const data = await res.json();
                 if(res.ok){
                     this.productDetail = data;

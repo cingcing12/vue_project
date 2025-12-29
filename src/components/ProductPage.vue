@@ -39,7 +39,7 @@ export default {
     methods: {
         async handleApi() {
             try {
-                const res = await fetch('http://localhost:3000');
+                const res = await fetch('https://vue-project-i8he.onrender.com');
                 const data = await res.json();
                 this.product = data;
                 console.log(this.product)
