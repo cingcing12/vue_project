@@ -1,26 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <NavBarPage v-if="isTrue"/>
+  <div class="container py-lg-4 py-3">
+    <router-view></router-view>
+  </div>
+  <FooterPage v-if="isTrue"/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import NavBarPage from './components/NavBarPage.vue';
+import FooterPage from './components/FooterPage.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    NavBarPage,
+    FooterPage
+  },
+
+
+  data(){
+    return{
+      isTrue: true
+    }
+  },
+
+
+  methods:{
+    handleRout(e){
+      this.isTrue = e;
+    },
+  },
+
+ 
+
+
+  
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
