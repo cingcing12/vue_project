@@ -16,7 +16,7 @@ const routes = [
     {path: "/register", name: "register", component: RegisterPage},
     {path: "/productdetail", name: "productdetail", component: ProductDetail},
 ];
-
+    
 const router = createRouter({
     history: createWebHashHistory(),
     routes,
