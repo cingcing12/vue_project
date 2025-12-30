@@ -9,21 +9,30 @@
                 <h6 class="title">{{ data.name }}</h6>
                 <div class="containerrateAPrice d-flex justify-content-between">
                     <div class="containerRate">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i>
-                </div>
-                <div class="containerPrice">
-                    <h6>${{ data.price.toFixed(2) }}</h6>
-                </div>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-half"></i>
+                    </div>
+                    <div class="containerPrice">
+                        <h6>${{ data.price.toFixed(2) }}</h6>
+                    </div>
                 </div>
                 <div class="containerBtnAdd my-2">
                     <button class="addToCart" @click="handleAddToCart">Add to cart</button>
                 </div>
             </div>
-            <router-link :to="`productdetail?id=${data.id}&product_name=${data.name}`">Details</router-link>
+            <router-link :to="{
+                path: '/productdetail',
+                query: {
+                    id: data.id,
+                    product_name: data.name
+                }
+            }">
+                Details
+            </router-link>
+
         </div>
     </div>
 </template>
@@ -31,8 +40,8 @@
 <script>
 export default {
     name: "ProductPage",
-    data(){
-        return{
+    data() {
+        return {
             product: []
         }
     },
@@ -43,12 +52,12 @@ export default {
                 const data = await res.json();
                 this.product = data;
                 console.log(this.product)
-            }catch(err){
+            } catch (err) {
                 console.log(err.message)
             }
         },
 
-        handleAddToCart(e){
+        handleAddToCart(e) {
             const cartItem = e.target.closest(".productItem");
             console.log(cartItem)
         }
@@ -61,35 +70,38 @@ export default {
 </script>
 
 <style scoped>
-.cartProduct{
+.cartProduct {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
 }
 
-.containerImg img{
+.containerImg img {
     width: 100%;
     transition: .5s ease;
 }
 
-.title{
+.title {
     display: -webkit-box;
     overflow: hidden;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
 
-.containerImg{
+.containerImg {
     overflow: hidden;
 }
 
-.productItem:hover img{
+.productItem:hover img {
     transform: scale(1.1);
 }
-.bi-star-fill , .bi-star-half{
+
+.bi-star-fill,
+.bi-star-half {
     color: rgb(13, 178, 13);
 }
-.addToCart{
+
+.addToCart {
     border-radius: 50px;
     background-color: rgb(27, 207, 27);
     color: white;
@@ -97,8 +109,9 @@ export default {
     padding: 5px 20px;
     border: none;
 }
-@media(max-width: 768px){
-    .cartProduct{
+
+@media(max-width: 768px) {
+    .cartProduct {
         grid-template-columns: repeat(2, 1fr);
     }
 }

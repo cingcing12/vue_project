@@ -35,24 +35,27 @@ export default{
     },
 
     methods:{
-        async handleProductDetail(){
-            const param = new URLSearchParams(window.location.search);
-            const id = param.get('id');
-            const name = param.get('product_name');
-            if(!id || !name){
-                window.location.href = "404.html"
-                return;
-            }
-            try{
-                const res = await fetch(`https://vue-project-i8he.onrender.com/productDetail/${id}?name=${name}`);
-                const data = await res.json();
-                if(res.ok){
-                    this.productDetail = data;
-                }
-            }catch(err){
-                console.log(err.message);
-            }
-        },
+        async handleProductDetail() {
+    const id = this.$route.query.id
+    const name = this.$route.query.product_name
+
+    if (!id || !name) {
+      this.$router.push('/') // or 404 page
+      return
+    }
+
+    try {
+      const res = await fetch(
+        `https://vue-project-i8he.onrender.com/productDetail/${id}?name=${name}`
+      )
+      const data = await res.json()
+      if (res.ok) {
+        this.productDetail = data
+      }
+    } catch (err) {
+      console.log(err.message)
+    }
+  },
 
         handleImg(e){
     const imgClone = e.target.cloneNode();
